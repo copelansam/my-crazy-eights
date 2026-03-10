@@ -37,6 +37,8 @@ There are 2 main ways to run this program:
   - What You'll Need:
     - Docker
   - Instructions To Build and Run the Program:
-    1. Ensure you have docker open
-    2. From the CLI, run `docker build -t crazy8s .` to build the docker image
-    3. Then run `docker run -it crazy8s`
+    1. Clone the repository using `git clone https://github.com/copelansam/my-crazy-eights`
+    2. Ensure you have docker open
+    3. Move to the root directory of the application
+    4. From the CLI, run `docker build -t crazy8s .` to build the docker image
+    5. Then run `docker run -it crazy8s`

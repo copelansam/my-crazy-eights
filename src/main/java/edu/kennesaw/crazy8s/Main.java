@@ -17,6 +17,7 @@ public class Main {
 
         System.out.println("Welcome to Simplified Crazy Eights!");
         System.out.println("Be the first person to empty their hand to win.");
+        System.out.println("Remove cards from your hand by matching them with the discard pile's rank or suit");
         System.out.println("If the deck runs out of cards, then the person with the least cards is the winner.");
         System.out.println("If both players have the same number of cards, then the game ends in a tie");
 
