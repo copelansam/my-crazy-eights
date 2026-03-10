@@ -17,26 +17,20 @@ public class DiscardPile {
         discardPile = new ArrayList<>();
     }
 
-    public void addCard(Card card, Suit suit){
-        discardPile.add(card);
+    public void addCard(Card card){
 
-        if (card.getRank() != Rank.EIGHT) {
-            updateSuit(card.getSuit());
-        }
-        else{
-            updateSuit(suit);
-        }
+        discardPile.add(card);
     }
 
     public Card getTopCard(){
         return discardPile.getLast();
     }
 
-    public void updateSuit(Suit suit){
-        this.currentSuit = suit;
+    public Suit getCurrentSuit(){
+        return this.currentSuit;
     }
 
-    public Suit getCurrentSuit(){
-        return this.getCurrentSuit();
+    public void setCurrentSuit(Suit currentSuit) {
+        this.currentSuit = currentSuit;
     }
 }

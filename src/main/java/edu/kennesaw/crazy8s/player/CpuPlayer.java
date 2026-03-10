@@ -2,72 +2,57 @@ package edu.kennesaw.crazy8s.player;
 
 import edu.kennesaw.crazy8s.cards.Card;
 import edu.kennesaw.crazy8s.domain.Suit;
+import edu.kennesaw.crazy8s.game.TurnContext;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 // The CPU Player will randomly select cards and suits anytime an option is available
-// The CPU isn't the brightest, but they don't let it get to them.
+// The CPU is a compulsive gambler, maybe one day they'll get over it
 
 public class CpuPlayer extends PlayerBase{
 
-    private Random rand;
+    private final Random rand = new Random();
 
     public CpuPlayer(){
 
         super("(Hopefully) Friendly CPU");
-        rand = new Random();
     }
 
     @Override
-    public Card playCard(Card topDiscard, Suit currentSuit){
+    public Card playCard(TurnContext turnContext){
 
-        System.out.println("These are the cards that " + getName() + " can play:");
+        List<Card> playableCards = filterPlayableCards(turnContext);
 
-        List<Card> currentHand = getPlayerHand();
-        List<Card> playable = new ArrayList<Card>();
+        if (playableCards.isEmpty()){
+            System.out.println("The CPU no playable cards. You will have to draw a card");
 
-        // Filters out the unplayable cards based on the current card on top of the discard pile & current suit
-        for (Card card : currentHand) {
-
-            if (card.matches(topDiscard, currentSuit)) {
-
-                playable.add(card);
-            }
-
-        }
-
-        // Handles if the CPU has no playable cards. The engine will make it draw a card
-        if (playable.isEmpty()) {
-
-            System.out.println(getName() + " has no playable cards! They'll draw a card");
             return null;
         }
 
-        // Displays the CPUs playable cards
-        int counter = 1;
-        for (Card card : playable) {
+        showPlayableCards(turnContext, playableCards);
 
-            System.out.print(counter + ": " + card.toString() + " ");
-
-            if (card.getRank() == topDiscard.getRank()) {
-
-                System.out.print("(Matching Rank)");
-            } else if (card.getSuit() == currentSuit) {
-                System.out.print("(Matching Suit)");
-            } else {
-                System.out.print("(CRAZY EIGHT! You'll get to pick the suit!)");
-            }
-            counter++;
-            System.out.println();
+        int randInt = rand.nextInt(playableCards.size() + 1) - 1;
+        if (randInt == -1){
+            System.out.println(turnContext.getCurrentPlayer().getName() + " has chosen to draw a card instead of playing one.");
+            return null;
         }
-
-        int randInt = rand.nextInt(playable.size());
-        return playable.get(randInt);
-
+        return playableCards.get(randInt);
     }
 
+    // CPU always plays drawn card if it is possible to play it.
+    @Override
+    public Card playDrawnCard(Card drawnCard, TurnContext turnContext){
+
+        if (drawnCard.matches(turnContext)){
+            return drawnCard;
+        }
+        else{
+            return null;
+        }
+    }
+
+    // CPU player chooses a random suit
     @Override
     public Suit chooseSuit(){
 
