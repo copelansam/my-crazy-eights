@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+// Keeps track of the players throughout the game
 public class PlayerManager {
 
     private final List<Player> players = new ArrayList<>();

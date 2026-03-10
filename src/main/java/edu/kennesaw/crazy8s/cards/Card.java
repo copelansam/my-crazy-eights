@@ -9,6 +9,6 @@ public interface Card {
     Rank getRank();
     Suit getSuit();
 
-    // Checks that a card matches the top card's rank, current suit, or is a crazy eight
+    // Used to check that a card is playable because it matches specific rules determined in implementation
     boolean matches(TurnContext turnContext);
 }

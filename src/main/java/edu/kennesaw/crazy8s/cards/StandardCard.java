@@ -34,7 +34,7 @@ public class StandardCard implements Card{
         // 1. The ranks match
         // 2. The suits match
         // 3. The rank of the card is 8 (crazy 8)
-        // If any of these are true, then the card can be placed in the discard pile
+        // If any of these are true, then the card can be played
 
         return (this.rank == turnContext.getTopDiscard().getRank() ||
                 this.suit == turnContext.getCurrentSuit() ||
@@ -43,7 +43,6 @@ public class StandardCard implements Card{
 
     @Override
     public String toString(){
-
         return this.getRank().getDisplayRank() + " of " + this.getSuit().getDisplaySuit();
 
     }

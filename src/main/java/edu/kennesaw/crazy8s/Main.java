@@ -6,11 +6,8 @@ import edu.kennesaw.crazy8s.cardDeck.DiscardPile;
 import edu.kennesaw.crazy8s.game.CrazyEightsGame;
 import edu.kennesaw.crazy8s.player.CpuPlayer;
 import edu.kennesaw.crazy8s.player.HumanPlayer;
-import edu.kennesaw.crazy8s.player.Player;
 import edu.kennesaw.crazy8s.player.PlayerManager;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {

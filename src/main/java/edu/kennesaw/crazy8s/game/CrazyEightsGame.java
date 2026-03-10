@@ -11,53 +11,48 @@ import java.util.Scanner;
 
 public class CrazyEightsGame {
 
-    private GameContext gameContext;
-    private Deck deck;
-    private DiscardPile discardPile;
+    private final GameContext gameContext;
+
     private final Scanner scanner = new Scanner(System.in);
 
 
     public CrazyEightsGame(PlayerManager players, Deck deck, DiscardPile discardPile){
 
         gameContext = new GameContext(deck, discardPile, players);
-        this.deck = deck;
-        this.discardPile = discardPile;
-
-
     }
 
     public void start(){
+
+        // Initializes the players and their decks, and starts the game
 
         PlayerManager players = gameContext.getPlayers();
 
         dealCards(gameContext);
 
-        playGame(deck, discardPile, players);
+        playGame(players);
         endGame(gameContext);
 
     }
 
     private void dealCards(GameContext gameContext){
+        // Deals the appropriate number of cards to each player and adds 1 to the discard pile
 
         List<Player> players = gameContext.getPlayers().getPlayers();
         // Gives each player 5 cards
         for (int i = 0; i < 5; i++){
-            Card card = deck.drawCard();
-            players.getFirst().drawCard(card);
-            card = deck.drawCard();
-            players.getLast().drawCard(card);
+            players.getFirst().drawCard(gameContext.getGameDeck().drawCard());
+            players.getLast().drawCard(gameContext.getGameDeck().drawCard());
         }
 
         // Puts a card in the discard pile to start the game
-        Card firstDiscard = deck.drawCard();
-        discardPile.addCard(firstDiscard);
-        discardPile.setCurrentSuit(firstDiscard.getSuit());
-
+        Card firstDiscard = gameContext.getGameDeck().drawCard();
+        gameContext.getDiscardPile().addCard(firstDiscard);
+        gameContext.getDiscardPile().setCurrentSuit(firstDiscard.getSuit());
     }
 
-    private void playGame(Deck deck, DiscardPile discardPile, PlayerManager players){
+    private void playGame(PlayerManager players){
 
-        while(!deck.isEmpty() && players.checkSmallestHand() > 0){
+        while(!gameContext.isDeckEmpty() && players.checkSmallestHand() > 0){
             gameContext.incrementTurnNumber();
             Player currentPlayer = players.getCurrentPlayer();
             TurnContext turnContext = createTurnContext(currentPlayer);
@@ -90,9 +85,9 @@ public class CrazyEightsGame {
 
     }
 
-
+    // Generates the context for the next turn including the card and suit to match and who the current player is
     public TurnContext createTurnContext(Player currentPlayer){
-        return new TurnContext(discardPile.getCurrentSuit(), discardPile.getTopCard(), gameContext, currentPlayer);
+        return new TurnContext(gameContext.getDiscardPile().getCurrentSuit(), gameContext.getDiscardPile().getTopCard(), gameContext, currentPlayer);
     }
 
 }

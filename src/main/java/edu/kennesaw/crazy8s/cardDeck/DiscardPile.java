@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DiscardPile {
 
-    private List<Card> discardPile;
+    private final List<Card> discardPile;
     private Suit currentSuit;
 
 
@@ -18,7 +18,6 @@ public class DiscardPile {
     }
 
     public void addCard(Card card){
-
         discardPile.add(card);
     }
 

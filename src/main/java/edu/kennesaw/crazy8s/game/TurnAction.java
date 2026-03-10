@@ -5,9 +5,11 @@ import edu.kennesaw.crazy8s.domain.Rank;
 import edu.kennesaw.crazy8s.domain.Suit;
 import edu.kennesaw.crazy8s.player.Player;
 
+// Responsible for orchestrating turn actions including playing cards, drawing cards, and choosing suites.
+// The exact implementation of these actions is determined by the implementation of the current player
 public class TurnAction {
 
-
+    // Displays information relevant to the turn to the player
     public static void displayTurnStats(GameContext gameContext, TurnContext turnContext){
         System.out.println("Turn #" + gameContext.getTurnNumber() + ":");
         System.out.println("The top card is : " + turnContext.getTopDiscard());
@@ -17,42 +19,15 @@ public class TurnAction {
         System.out.println("There are " + gameContext.getRemainingDeckSize() + " cards left in the deck");
     }
 
+    // The player begins their turn
     public static void takeTurn(GameContext gameContext, TurnContext turnContext){
         Player currentPlayer = turnContext.getCurrentPlayer();
 
         currentPlayer.showAllCards();
         selectCard(gameContext,turnContext);
-
     }
 
-    public static Card drawCard(GameContext gameContext, TurnContext turnContext){
-
-        Player currentPlayer = turnContext.getCurrentPlayer();
-        String playerName = currentPlayer.getName();
-
-        Card drawnCard = gameContext.drawCard();
-
-        currentPlayer.drawCard(drawnCard);
-        System.out.println(playerName + " drew the " + drawnCard);
-
-        if (!drawnCard.matches(turnContext)){
-            System.out.println(playerName + " cannot play the card they just drew.");
-            return null;
-        }
-
-        Card playedCard = currentPlayer.playDrawnCard(drawnCard, turnContext);
-
-        if (playedCard == null){
-            System.out.println(playerName + " has not played the card that they just drew.");
-            return null;
-
-        }
-        else{
-            return playedCard;
-        }
-
-    }
-
+    // The player selects a card, and TurnAction handles if the player has no cards to play
     public static void selectCard(GameContext gameContext, TurnContext turnContext){
 
         Player currentPlayer = turnContext.getCurrentPlayer();
@@ -82,5 +57,31 @@ public class TurnAction {
         }
     }
 
+    // If the player has no cards to play, have them draw a card
+    public static Card drawCard(GameContext gameContext, TurnContext turnContext){
 
+        Player currentPlayer = turnContext.getCurrentPlayer();
+        String playerName = currentPlayer.getName();
+
+        Card drawnCard = gameContext.getGameDeck().drawCard();
+
+        currentPlayer.drawCard(drawnCard);
+        System.out.println(playerName + " drew the " + drawnCard);
+
+        if (!drawnCard.matches(turnContext)){
+            System.out.println(playerName + " cannot play the card they just drew.");
+            return null;
+        }
+
+        Card playedCard = currentPlayer.playDrawnCard(drawnCard, turnContext);
+
+        if (playedCard == null){
+            System.out.println(playerName + " has not played the card that they just drew.");
+            return null;
+
+        }
+        else{
+            return playedCard;
+        }
+    }
 }

@@ -2,14 +2,14 @@ package edu.kennesaw.crazy8s.game;
 
 import edu.kennesaw.crazy8s.cardDeck.Deck;
 import edu.kennesaw.crazy8s.cardDeck.DiscardPile;
-import edu.kennesaw.crazy8s.cards.Card;
 import edu.kennesaw.crazy8s.player.PlayerManager;
 
+// Used to store objects relevant to the game (decks, players, turn number)
 public class GameContext {
     private final Deck gameDeck;
     private final DiscardPile discardPile;
     private int turnNumber;
-    private PlayerManager players;
+    private final PlayerManager players;
 
     GameContext(Deck gameDeck, DiscardPile discardPile, PlayerManager players){
         this.gameDeck = gameDeck;
@@ -20,10 +20,6 @@ public class GameContext {
 
     public Deck getGameDeck() {
         return gameDeck;
-    }
-
-    public Card drawCard(){
-        return getGameDeck().drawCard();
     }
 
     public int getRemainingDeckSize(){

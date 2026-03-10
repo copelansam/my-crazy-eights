@@ -7,6 +7,7 @@ import edu.kennesaw.crazy8s.domain.Rank;
 import edu.kennesaw.crazy8s.domain.Suit;
 import edu.kennesaw.crazy8s.player.Player;
 
+// Stores objects and variables relevant to the current turn (card/suit to match, current player, etc.)
 public class TurnContext {
     private Suit currentSuit;
     private Card topDiscard;

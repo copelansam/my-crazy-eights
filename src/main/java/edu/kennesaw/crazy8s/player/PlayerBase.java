@@ -17,7 +17,6 @@ public abstract class PlayerBase implements Player {
     protected final List<Card> hand = new ArrayList<>();
 
     PlayerBase(String name){
-
         this.name = name;
     }
 
@@ -37,6 +36,8 @@ public abstract class PlayerBase implements Player {
         hand.remove(card);
     }
 
+    // Performs player's turn by delegating to TurnAction
+    // which calls concrete implementations for chooseSuit, playCard, playDrawnCard
     @Override
     public void takeTurn(GameContext gameContext, TurnContext turnContext){
         TurnAction.takeTurn(gameContext, turnContext);
@@ -49,6 +50,7 @@ public abstract class PlayerBase implements Player {
         return this.name;
     }
 
+    // Displays all of the cards in the player's hand
     public void showAllCards(){
         System.out.println("Your current hand:");
         for (Card card: hand){
@@ -64,11 +66,11 @@ public abstract class PlayerBase implements Player {
         return hand.isEmpty();
     }
 
+    // returns an unmodifiable list of all of the cards that are playable based on the current turn context
     public List<Card> filterPlayableCards(TurnContext turnContext){
 
         List<Card> playable = new ArrayList<Card>();
 
-        // Filters out the unplayable cards based on the current card on top of the discard pile & current suit
         for (Card card : hand) {
 
             if (card.matches(turnContext)){
@@ -82,9 +84,10 @@ public abstract class PlayerBase implements Player {
             return Collections.emptyList();
         }
 
-        return playable;
+        return Collections.unmodifiableList(playable);
     }
 
+    // Shows all of the cards that are playable based on the current turn context, and the reason why they are playable
     public void showPlayableCards(TurnContext turnContext, List<Card> playableCards){
 
         System.out.println("\nYour playable cards are: ");

@@ -7,7 +7,7 @@ import edu.kennesaw.crazy8s.game.TurnContext;
 import java.util.List;
 import java.util.Random;
 
-// The CPU Player will randomly select cards and suits anytime an option is available
+// The CPU Player will randomly select options anytime an option is available
 // The CPU is a compulsive gambler, maybe one day they'll get over it
 
 public class CpuPlayer extends PlayerBase{

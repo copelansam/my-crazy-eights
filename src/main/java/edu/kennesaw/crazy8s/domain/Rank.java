@@ -17,7 +17,7 @@ public enum Rank {
 
     private final String displayRank;
 
-    private Rank(String displayRank){
+    Rank(String displayRank){
 
         this.displayRank = displayRank;
     }
