@@ -11,6 +11,8 @@ The rules are simple:
 - The first player to run out of cards wins. If the deck runs out of cards, then the player with the least amount of cards wins. 
 - If both players have the same amount of cards then the game ends in a tie.
 
+A screenshot of the game: ![A screenshot of the game](screenshot.png)
+
 ## Key Concepts
 ***
 This project is meant to demonstrate the following concepts:
