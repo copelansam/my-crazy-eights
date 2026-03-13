@@ -4,14 +4,12 @@
 This project was created as part of my Object-Oriented Development Class.
 The project is a simplified version of the Crazy Eight Card Game.
 The rules are simple: 
-- Each user has a hand of cards that they must discard by matching their card's rank or suit with the discard pile.
+- Each user has a **hand** of cards that they must discard by matching their cards' **rank** or **suit** with the **discard pile**.
 - Each turn, the player may choose between **playing** or **drawing** a card.
 - If the player cannot discard a card, then they must draw a card which they can choose to play if it matches the discard pile.
 - Cards of rank 8 are referred to as **Crazy Eight Cards**. When a user plays one, they can select the suit that they want to match in the next turn. 
 - The first player to run out of cards wins. If the deck runs out of cards, then the player with the least amount of cards wins. 
 - If both players have the same amount of cards then the game ends in a tie.
-
-A screenshot of the game: ![A screenshot of the game](screenshot.png)
 
 ## Key Concepts
 ***
@@ -44,3 +42,5 @@ There are 2 main ways to run this program:
     3. Move to the root directory of the application
     4. From the CLI, run `docker build -t crazy8s .` to build the docker image
     5. Then run `docker run -it crazy8s`
+
+A screenshot of the game: ![A screenshot of the game](screenshot.png)
