@@ -52,7 +52,7 @@ public abstract class PlayerBase implements Player {
 
     // Displays all of the cards in the player's hand
     public void showAllCards(){
-        System.out.println("Your current hand:");
+        System.out.println(getName() + "'s current hand:");
         for (Card card: hand){
             System.out.println("- " + card.toString());
         }
@@ -90,7 +90,7 @@ public abstract class PlayerBase implements Player {
     // Shows all of the cards that are playable based on the current turn context, and the reason why they are playable
     public void showPlayableCards(TurnContext turnContext, List<Card> playableCards){
 
-        System.out.println("\nYour playable cards are: ");
+        System.out.println("\n" + turnContext.getCurrentPlayer().getName() + "'s playable cards are: ");
         int counter = 1;
         for (Card card: playableCards){
             System.out.print(counter + ". " + card.toString());

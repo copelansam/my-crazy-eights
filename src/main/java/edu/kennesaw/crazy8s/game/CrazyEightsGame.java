@@ -59,7 +59,7 @@ public class CrazyEightsGame {
             TurnAction.displayTurnStats(gameContext,turnContext);
             currentPlayer.takeTurn(gameContext, turnContext);
             players.playerChange();
-            System.out.println("Press anything to continue");
+            System.out.println("Press enter to continue");
             scanner.nextLine();
         }
     }
